@@ -4,11 +4,14 @@
   "description": "este proyecto cumple cómo función trabajar el back-end del proyecto final de base de datos 2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Milly Benitez y Andres Ruiz",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-myconnection": "^1.0.4",
