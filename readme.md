@@ -15,7 +15,7 @@
 # docente
  - Con esta cosulta se obtiene las asignaturas asignadas por docente  
 ```sql
-     SELECT asignaturas.nombre FROM asignaturas NATURAL JOIN ensenia WHERE ensenia.id_docente = '001U';
+     SELECT asignaturas.nombre FROM asignaturas NATURAL JOIN ensenia WHERE ensenia.id_docente = '001U' GROUP BY(asignaturas.nombre);
 ```
 - Con esta consulta se obtiene la lista de los estudiantes por grado
 ```sql
@@ -49,4 +49,5 @@ INSERT INTO `archivo`(`id_actividad`, `peso`, `formato`, `nombre`, `ruta`) VALUE
           }
           ```
 
-GET:  localhost:3000/school/docente/id          
+
+GET:  localhost:3000/school/docente/id
