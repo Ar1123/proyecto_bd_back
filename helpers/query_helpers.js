@@ -4,12 +4,13 @@ const connectionDb = require('../database/config');
 
 
 const querys = (sql, variablea, res) =>{
+    console.log('sss', variablea);
     connectionDb.query(sql, variablea, (err, rows)=>{
              if(err){
                   res.json(responses(false,500,"error interno",[]));  
              }else{
                  if(rows.length>0){
-                    res.json(responses(true,200,"Consulta exitosa",[rows[0]])); 
+                    res.json(responses(true,200,"Consulta exitosa",rows)); 
                  }else{
                     res.json(responses(false,404,"Datos no encontrados",[])); 
                  }
