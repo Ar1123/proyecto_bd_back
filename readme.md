@@ -35,6 +35,23 @@ INSERT INTO `archivo`(`id_actividad`, `peso`, `formato`, `nombre`, `ruta`) VALUE
 
 
 # estudiante 
+- Consulta para obtener los datos del estudiante
+```sql
+SELECT * FROM `estudiante` WHERE id_estudiante = '042U';
+```
+- Consulta para obetener las asignaturas que ve ese estudiante para eso necesitamos el id del grupo del estudiante
+```sql
+SELECT * FROM grupo NATURAL JOIN grados NATURAL JOIN asignadas NATURAL JOIN asignaturas WHERE id_grupo = '001g'
+ ```
+- Consulta para obtener las actividades asignadas
+ ```sql
+SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grupo = '001g' ;
+ ```
+
+ - Consulta par obtener la actvidad asignada
+ ```sql
+ SELECT * FROM actividad WHERE id_actividad = 1 ;
+ ```
 
 
 
