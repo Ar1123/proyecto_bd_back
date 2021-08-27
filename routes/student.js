@@ -1,12 +1,13 @@
 const express = require('express');
-const { datosEstudiante, asignaturasEstudiante, actividadesEstudiante, actividadEstudiante } = require('../controllers/student_controller');
-const routes = express.Router();
+const { datosEstudiante,asignaturasEstudiante,actividadesEstudiante } = require('../controllers/student_controller');
+const routese = express.Router();
 
 //Al obtener el id_estudiante , obtenemos el id_grupo, no se si ira asi
-routes.get('/estudiante/:id/:id_grupo', datosEstudiante, asignaturasEstudiante);
-routes.get('/actividadesEstudiante/:id/:id_grupo', actividadesEstudiante);
-routes.get('/actividadEstudiante/:id/:id_actividad', actividadEstudiante);
-//Tambien tengo duda en esta
-routes.post('/actividadEstudiante/:id/id_actividad', )
+routese.get('/estudiante/:id', datosEstudiante);
+// routese.get('/actividadesEstudiante/:id/:id_grupo', actividadesEstudiante);
+routese.get('/asignaturas/:id_grupo', asignaturasEstudiante);
+routese.get('/actividadEstudiante/:id_grupo', actividadesEstudiante);
+// //Tambien tengo duda en esta
+// routese.post('/actividadEstudiante/:id/id_actividad', )
 
-module.exports = routes;
+module.exports = routese;
