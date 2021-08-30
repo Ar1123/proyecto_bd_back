@@ -8,10 +8,10 @@ const querys = (sql, variablea, res, view = true) =>{
         connectionDb.query(sql, variablea, (err, rows)=>{
             if(err){
                 console.log('sd ',err);
-                 res.json(responses(false,500,"error interno",[]));  
+                 res.status(500).json(responses(false,500,"error interno",[]));  
             }else{
                 if(rows.length>0){
-                    res.json(responses(true,200,"Consulta exitosa",rows)); 
+                    res.status(200).json(responses(true,200,"Consulta exitosa",rows)); 
                 } else if(rows.affectedRows>0){
 
                         if(view){
@@ -19,7 +19,7 @@ const querys = (sql, variablea, res, view = true) =>{
                         }  
                 } else{
                     
-                   res.json(responses(false,404,"Datos no encontrados",[])); 
+                   res.status(404).json(responses(false,404,"Datos no encontrados",[])); 
                 }
             }    
        });

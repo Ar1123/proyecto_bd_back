@@ -13,7 +13,14 @@ comentario = (req, res = response)=>{
      querys(sql, [id_actividad, id_usuario, fecha, contenido], res, true);   
 }
 
+datosUser= (req, res = response)=>{
+    const {id} = req.params;
+    sql = 'SELECT apellidos, nombres FROM usuario WHERE id_usuario = ?';
+    querys(sql, [id], res, true);
+}
+
 module.exports ={
 
-    comentario
+    comentario,
+    datosUser
 }

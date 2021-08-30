@@ -5,10 +5,13 @@ const routes = express.Router();
 
 //Exportaciones locales
 
-const { asignaturas, 
+const { 
+    asignaturas, 
     listaEstudiantes, 
     createActividad, 
-    agregarArchivos } = require('../controllers/teacher_controller');
+    agregarArchivos,
+    grupos,
+    grados     } = require('../controllers/teacher_controller');
 
 
 const { validarCampos } = require('../middlewares/validate_field');
@@ -16,11 +19,35 @@ const { validarCampos } = require('../middlewares/validate_field');
 
 //rutas 
 
-//GET
+/*
+.......##.......##..######...########.########
+......##.......##..##....##..##..........##...
+.....##.......##...##........##..........##...
+....##.......##....##...####.######......##...
+...##.......##.....##....##..##..........##...
+..##.......##......##....##..##..........##...
+.##.......##........######...########....##...
+*/
 routes.get('/docente/:id', asignaturas);
 routes.get('/lista/:id', listaEstudiantes);
+routes.get('/grupos/:id', grupos);
+routes.get('/grados/:id', grados);
+/*
 
-//POST
+
+
+
+
+
+
+.......##.......##.########...#######...######..########
+......##.......##..##.....##.##.....##.##....##....##...
+.....##.......##...##.....##.##.....##.##..........##...
+....##.......##....########..##.....##..######.....##...
+...##.......##.....##........##.....##.......##....##...
+..##.......##......##........##.....##.##....##....##...
+.##.......##.......##.........#######...######.....##...
+*/
 routes.post('/crearActividad', 
 [
     //validaciones de los campos

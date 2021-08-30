@@ -15,6 +15,30 @@ const { querys, querys_return } = require("../helpers/query_helpers");
 .##.......##........######...########....##...
 */
 
+// Se listan los grupos donde el docente da clases
+grupos = (req, res = response)=>{
+    const id = req.params.id;
+
+    ;
+
+    const sql =  'SELECT grado, posicion FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo GROUP BY (ensenia.id_grupo)';
+    querys(sql,[id], res, true);
+    
+
+}
+// Se listan los grados donde el docente da clases
+
+grados = (req, res = response)=>{
+    const id = req.params.id;
+
+    ;
+
+    const sql =  'SELECT grado FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo GROUP BY (grado)';
+    querys(sql,[id], res, true);
+    
+
+}
+
 //se listan las asignaturas que imparte el docente
 asignaturas = (req, res = response)=>{
     const id =  req.params.id;
@@ -96,7 +120,9 @@ module.exports = {
     asignaturas,
     listaEstudiantes,
     createActividad,
-    agregarArchivos
+    agregarArchivos,
+    grupos,
+    grados
 }
  
 

@@ -15,6 +15,10 @@
 
 
 # docente
+ - Esta consulta obtiene los grados donde el docent da clase clase
+    ```sql  
+     SELECT grado, posicion FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = '?' AND ensenia.id_grupo = grupo.id_grupo GROUP BY (ensenia.id_grupo) 
+   ```  
  - Con esta cosulta se obtiene las asignaturas asignadas por docente  
 ```sql
      SELECT asignaturas.nombre FROM asignaturas NATURAL JOIN ensenia WHERE ensenia.id_docente = '001U' GROUP BY(asignaturas.nombre);
@@ -66,6 +70,13 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
 
 
  # Endpoints 
+ # GET
+- Obtiene las asignaturas que imparte el docente
+`GET`:  localhost:3000/school/docente/id
+
+ - Obtiene los grados donde el docente da clase
+
+# POST
    -  para iniciar sesion
    `POST`: localhost:3000/school/sigin
       - body 
@@ -77,11 +88,8 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
           }
           ```
 
-- Obtiene las asignaturas que imparte el docente
-`GET`:  localhost:3000/school/docente/id
 
--
--
+
 - Crear actividad 
 `POST`: localhost:3000/school/crear 
    - BODY:
@@ -112,10 +120,10 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
      - BODY:
    ```json
          {
-         "id_actividad":1,
-         "id_usuario":"001U",
-         "fecha":"2000-12-12",
-         "contenido":"a"
+      "id_actividad":1,
+      "id_usuario":"001U",
+      "fecha":"2000-12-12",
+      "contenido":"a"
          }
    ```
 
