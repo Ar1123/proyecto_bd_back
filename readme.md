@@ -17,7 +17,10 @@
 # docente
  - Esta consulta obtiene los grados donde el docent da clase clase
     ```sql  
-     SELECT grado, posicion FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = '?' AND ensenia.id_grupo = grupo.id_grupo GROUP BY (ensenia.id_grupo) 
+    consulta 1
+      <!-- SELECT * FROM (grados NATURAL JOIN grupo) INNER JOIN ensenia WHERE id_grado = '006G' AND ensenia.id_docente = '001U' AND ensenia.id_grupo = grupo.id_grupo GROUP BY(grupo.id_grupo); -->
+   consulta 2
+     SELECT grado, posicion FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = '001U' AND ensenia.id_grupo = grupo.id_grupo and grados.id_grado='010G'GROUP BY (ensenia.id_grupo);
    ```  
  - Con esta cosulta se obtiene las asignaturas asignadas por docente  
 ```sql
@@ -75,6 +78,9 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
 `GET`:  localhost:3000/school/docente/id
 
  - Obtiene los grados donde el docente da clase
+ localhost:3000/school/grado/001U/
+ - obtiene los grupos donde el docente da clases por grado
+ localhost:3000/school/grado/001U/006G
 
 # POST
    -  para iniciar sesion

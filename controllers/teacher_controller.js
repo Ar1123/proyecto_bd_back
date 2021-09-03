@@ -15,14 +15,17 @@ const { querys, querys_return } = require("../helpers/query_helpers");
 .##.......##........######...########....##...
 */
 
-// Se listan los grupos donde el docente da clases
+// Se listan los grupos donde el docente da clases 
 grupos = (req, res = response)=>{
-    const id = req.params.id;
+    // const id = req.params.id;
+    //     console.log(req.params);
+    // ;
 
-    ;
+    const sql = 'SELECT grado, posicion, ensenia.id_grupo  FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo and grados.id_grado= ? GROUP BY (ensenia.id_grupo)';
+  const  { idocente, idGrado} = req.params;
 
-    const sql =  'SELECT grado, posicion FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo GROUP BY (ensenia.id_grupo)';
-    querys(sql,[id], res, true);
+    // const sql =  'SELECT grado, posicion FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo GROUP BY (ensenia.id_grupo)';
+    querys(sql,[idocente, idGrado], res, true);
     
 
 }
@@ -33,7 +36,7 @@ grados = (req, res = response)=>{
 
     ;
 
-    const sql =  'SELECT grado FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo GROUP BY (grado)';
+    const sql =  'SELECT grado, id_grado FROM (ensenia INNER JOIN grupo) NATURAL JOIN grados WHERE ensenia.id_docente = ? AND ensenia.id_grupo = grupo.id_grupo GROUP BY (grado)';
     querys(sql,[id], res, true);
     
 

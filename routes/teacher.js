@@ -30,7 +30,7 @@ const { validarCampos } = require('../middlewares/validate_field');
 */
 routes.get('/docente/:id', asignaturas);
 routes.get('/lista/:id', listaEstudiantes);
-routes.get('/grupos/:id', grupos);
+routes.get('/grupos/:idocente/:idGrado', grupos);
 routes.get('/grados/:id', grados);
 /*
 
