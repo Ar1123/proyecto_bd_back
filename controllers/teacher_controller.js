@@ -131,11 +131,12 @@ agregarArchivos=(req, res = response)=>{
            peso,
            formato,
            nombre,
-           ruta         
+           ruta,
+           tipo_archivo         
     } = req.body;
-  const sql =  'INSERT INTO `archivo`(`id_actividad`, `peso`, `formato`, `nombre`, `ruta`) VALUES (?,?,?,?,?)';
+  const sql =  'INSERT INTO `archivo`(`id_actividad`, `peso`, `formato`, `nombre`, `ruta`, tipo_archivo) VALUES (?,?,?,?,?,?)';
 
-  querys(sql,[id_actividad,peso, formato,nombre, ruta], res, true);
+  querys(sql,[id_actividad,peso, formato,nombre, ruta,tipo_archivo], res, true);
 }
 
 
