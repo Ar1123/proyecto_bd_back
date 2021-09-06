@@ -46,6 +46,21 @@ INSERT INTO `archivo`(`id_actividad`, `peso`, `formato`, `nombre`, `ruta`) VALUE
 
 ```
 
+```sql
+   con esta consulta se obtiene el grado
+SELECT grado FROM grados WHERE id_grado
+```
+ ``` sql
+      con esta consulta se obtiene el grupo y su posicion de acuerdo al grado
+SELECT grado, posicion FROM grados NATURAL JOIN grupo WHERE id_grupo=? AND id_grado = ?;
+
+ ```
+ ```sql
+     Esta consulta obtiene el nombre de la asignatura que da el docente de acuerdo al grupo
+      SELECT nombre FROM ensenia NATURAL JOIN asignaturas WHERE ensenia.id_docente = ? AND ensenia.id_grupo = ?;
+
+ ```
+
 
 
 
@@ -69,6 +84,7 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
  ```sql
  SELECT * FROM actividad WHERE id_actividad = 1 ;
  ```
+ - 
 
 
 

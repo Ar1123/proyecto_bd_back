@@ -11,7 +11,8 @@ const {
     createActividad, 
     agregarArchivos,
     grupos,
-    grados     } = require('../controllers/teacher_controller');
+    grados,     
+    getGrupo} = require('../controllers/teacher_controller');
 
 
 const { validarCampos } = require('../middlewares/validate_field');
@@ -32,6 +33,9 @@ routes.get('/docente/:id', asignaturas);
 routes.get('/lista/:id', listaEstudiantes);
 routes.get('/grupos/:idocente/:idGrado', grupos);
 routes.get('/grados/:id', grados);
+routes.get('/grado/:id_grado', getGrado);
+routes.get('/grupo/:id_grupo/:id_grado', getGrupo);
+routes.get('/asignatura/:id_grupo/:id_docente', getAsignatura);
 /*
 
 

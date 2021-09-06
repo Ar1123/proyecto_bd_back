@@ -61,7 +61,29 @@ listaEstudiantes = (req, res = response)=>{
 }
 
 
+getGrado=(req, res = response)=>{
+    const{id_grado} = req.params;
+    const sql = 'SELECT grado FROM grados WHERE id_grado = ?';
+    querys(sql,[id_grado], res, true);
 
+}
+
+
+getGrupo = (req, res = response)=>{
+    const {id_grupo, id_grado} = req.params;
+
+const  sql = 'SELECT grado, posicion FROM grados NATURAL JOIN grupo WHERE id_grupo= ? AND id_grado = ?';     
+
+querys(sql,[id_grupo, id_grado], res, true); 
+
+
+}
+
+getAsignatura =(req, res = response)=>{
+ const {id_grupo, id_docente} = req.params;
+ sql =  'SELECT nombre FROM ensenia NATURAL JOIN asignaturas WHERE ensenia.id_docente = ? AND ensenia.id_grupo = ?';
+ querys(sql, [id_docente, id_grupo], res, true);
+ }
 /*
 .......##.......##.########...#######...######..########
 ......##.......##..##.....##.##.....##.##....##....##...
@@ -125,7 +147,11 @@ module.exports = {
     createActividad,
     agregarArchivos,
     grupos,
-    grados
+    grados,
+    getGrado,
+    getGrupo,
+    getAsignatura
+
 }
  
 
