@@ -81,7 +81,7 @@ querys(sql,[id_grupo, id_grado], res, true);
 
 getAsignatura =(req, res = response)=>{
  const {id_grupo, id_docente} = req.params;
- sql =  'SELECT nombre FROM ensenia NATURAL JOIN asignaturas WHERE ensenia.id_docente = ? AND ensenia.id_grupo = ?';
+ sql =  'SELECT nombre,id_asignaturas FROM ensenia NATURAL JOIN asignaturas WHERE ensenia.id_docente = ? AND ensenia.id_grupo = ?';
  querys(sql, [id_docente, id_grupo], res, true);
  }
 /*
@@ -112,11 +112,13 @@ createActividad =async (req, res = response)=>{
     //se recupera el id de ultima actividad creada
     sql2 = 'SELECT MAX(id_actividad) as id_actividad FROM actividad';
     const result =await querys_return(sql2,[], res );
+
     //Se asigna la actividad al un determinado grupo    
     const sql3 = 'INSERT INTO asigna(id_actividad, id_grupo, id_docente, fecha_inicial, fecha_limite) VALUES (?,?,?,?,?)';
     querys(sql3,[result,id_grupo ,id_docente, fecha_inicial,fecha_limite], res, false);
-    //se muestra el resultado de la actividad creada 
-    
+   
+   
+    //se muestra el resultado de la actividad creada  
     const sql4= 'SELECT id_actividad, descripcion, fecha_inicial, fecha_limite FROM actividad NATURAL JOIN asigna WHERE id_actividad = ?'; 
     querys (sql4, [result], res, true);
 
