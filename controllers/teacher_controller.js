@@ -111,8 +111,9 @@ createActividad =async (req, res = response)=>{
     
     //se recupera el id de ultima actividad creada de acuerdo al docente
     
-    sql2 = 'SELECT id_actividad FROM actividad where descripcion = ?';
-    const result =await querys_return(sql2,[descripcion], res, true );
+    sql2 = 'SELECT MAX(id_actividad) as id_actividad FROM actividad';
+    const result =await querys_return(sql2,[], res, true );
+    console.log( result);
     
     //Se asigna la actividad al un determinado grupo
     

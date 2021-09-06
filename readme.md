@@ -113,7 +113,7 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
 
 
 - Crear actividad 
-`POST`: localhost:3000/school/crear 
+`POST`: localhost:3000/school/crearActividad
    - BODY:
    ```json
          {
