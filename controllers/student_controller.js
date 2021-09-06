@@ -66,23 +66,37 @@ actividadAsignada = (req, res = response) => {
 
 
 
-CargarActividad = (req, res = response) => {
-    // const id_actividad = req.params.id_actividad;
-    // const id = req.params.id;
-    const { id_actividad, id, peso, formato, nombre, ruta, fecha, tipo_archivo } = req.body;
-
+CargarActividad =(req, res=response)=>{
+    const { id_actividad, id_estudiante, peso, formato, nombre, ruta, fecha, tipo_archivo } = req.body;
     const sql = 'INSERT INTO archivo( id_actividad, peso,formato,nombre,ruta, tipo_archivo) VALUES  (?,?,?,?,?,?)';
-    querys(sql, [id_actividad, peso, formato, nombre, ruta, tipo_archivo], res);
+    querys(sql, [id_actividad, peso, formato, nombre, ruta, tipo_archivo], res, false);
 
+    const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,?)';       
+   querys(sqls, [id_actividad, id_estudiante, fecha, 0], res);
+
+
+
+    
 
 }
 
-cargarEntrega = (req, res = response) => {
-    const { id_actividad, id, fecha, nota } = req.body;
+// CargarActividad = (req, res = response) => {
+//     // const id_actividad = req.params.id_actividad;
+//     // const id = req.params.id;
+//     const { id_actividad, id, peso, formato, nombre, ruta, fecha, tipo_archivo } = req.body;
 
-    const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,?)';
-    querys(sqls, [id_actividad, id, fecha, nota], res);
-}
+//     const sql = 'INSERT INTO archivo( id_actividad, peso,formato,nombre,ruta, tipo_archivo) VALUES  (?,?,?,?,?,?)';
+//     querys(sql, [id_actividad, peso, formato, nombre, ruta, tipo_archivo], res);
+
+
+// }
+
+// cargarEntrega = (req, res = response) => {
+//     const { id_actividad, id, fecha, nota } = req.body;
+
+//     const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,?)';
+//     querys(sqls, [id_actividad, id, fecha, nota], res);
+// }
 
 module.exports = {
     asignaturasEstudiante,
@@ -92,5 +106,5 @@ module.exports = {
     CargarActividad,
     actividadAsignada,
     gradoEstudiante,
-    cargarEntrega
+    // cargarEntrega
 }

@@ -150,3 +150,18 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
    ```
 
 
+```json
+para cargar actividad por parte del estudiante
+localhost:3000/school/cargarActividad
+  {
+        "id_actividad":10,
+         "peso":12,
+         "formato":"jpg",
+         "nombre":"nombre",
+         "ruta":"dsd",
+         "tipo_archivo":"33",
+         "id_estudiante":"042U",
+         "fecha":"20201-09-09"
+
+      }
+```

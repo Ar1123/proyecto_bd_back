@@ -13,6 +13,6 @@ routese.get('/gradoEstudiante/:id', gradoEstudiante);
 
 // //Tambien tengo duda en esta
 routese.post('/cargarActividad', CargarActividad);
-routese.post('/cargarEntrega', cargarEntrega);
+// routese.post('/cargarEntrega', cargarEntrega);
 
 module.exports = routese;

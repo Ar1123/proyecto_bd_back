@@ -107,19 +107,19 @@ createActividad =async (req, res = response)=>{
     
     // Se crea la actividad
     const sql1 = 'INSERT INTO actividad( id_periodo, descripcion) VALUES  (?,?)';
-     querys(sql1, [id_periodo, descripcion], res, true);
+     querys(sql1, [id_periodo, descripcion], res, false);
     
-    //se recupera el id de ultima actividad creada de acuerdo al docente
-    
+    //se recupera el id de ultima actividad creada
     sql2 = 'SELECT MAX(id_actividad) as id_actividad FROM actividad';
-    const result =await querys_return(sql2,[], res, true );
-    console.log( result);
-    
-    //Se asigna la actividad al un determinado grupo
-    
+    const result =await querys_return(sql2,[], res );
+    //Se asigna la actividad al un determinado grupo    
     const sql3 = 'INSERT INTO asigna(id_actividad, id_grupo, id_docente, fecha_inicial, fecha_limite) VALUES (?,?,?,?,?)';
-     
     querys(sql3,[result,id_grupo ,id_docente, fecha_inicial,fecha_limite], res, false);
+    //se muestra el resultado de la actividad creada 
+    
+    const sql4= 'SELECT id_actividad, descripcion, fecha_inicial, fecha_limite FROM actividad NATURAL JOIN asigna WHERE id_actividad = ?'; 
+    querys (sql4, [result], res, true);
+
 }
 
 agregarArchivos=(req, res = response)=>{

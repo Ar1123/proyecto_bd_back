@@ -7,6 +7,7 @@ const querys = (sql, variablea, res, view = true) =>{
     try {
         connectionDb.query(sql, variablea, (err, rows)=>{
             if(err){
+                console.log(variablea);
                 console.log('sd ',err);
                  res.status(500).json(responses(false,500,"error interno",[]));  
             }else{
