@@ -9,6 +9,14 @@ datosEstudiante = (req, res = response) => {
 
 }
 
+gradoEstudiante = (req, res = response) => {
+
+    const id = req.params.id;
+    const sql = 'SELECT * FROM grados WHERE grados.id_grado = (SELECT grupo.id_grado FROM estudiante NATURAL JOIN grupo WHERE estudiante.id_estudiante = ?)';
+    querys(sql, [id], res);
+
+}
+
 // SELECT id_grado FROM grupo NATURAL JOIN grados WHERE grupo.id_grupo = '001g'
 asignaturasEstudiante = (req, res = response) => {
     const id_grupo = req.params.id_grupo;
@@ -59,17 +67,22 @@ actividadAsignada = (req, res = response) => {
 
 
 CargarActividad = (req, res = response) => {
-    const id_actividad = req.params.id_actividad;
-    const id = req.params.id;
-    const { id_archivo, peso, formato, nombre, ruta, fecha } = req.body;
+    // const id_actividad = req.params.id_actividad;
+    // const id = req.params.id;
+    const { id_actividad, id, peso, formato, nombre, ruta, fecha, tipo_archivo } = req.body;
 
-    const sql = 'INSERT INTO archivo( id_archivo, id_actividad, peso,formato,nombres,ruta) VALUES  (?,?;?,?,?,?,?)';
-    querys(sql, [id_archivo, id_actividad, peso, formato, nombre, ruta], res);
+    const sql = 'INSERT INTO archivo( id_actividad, peso,formato,nombre,ruta, tipo_archivo) VALUES  (?,?,?,?,?,?)';
+    querys(sql, [id_actividad, peso, formato, nombre, ruta, tipo_archivo], res);
 
-    const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,0)';
-    querys(sqls, [id_actividad, id, fecha, 0], res);
+
 }
 
+cargarEntrega = (req, res = response) => {
+    const { id_actividad, id, fecha, nota } = req.body;
+
+    const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,?)';
+    querys(sqls, [id_actividad, id, fecha, nota], res);
+}
 
 module.exports = {
     asignaturasEstudiante,
@@ -77,5 +90,7 @@ module.exports = {
     actividadesEstudiante,
     asignaturasEstudiante1,
     CargarActividad,
-    actividadAsignada
+    actividadAsignada,
+    gradoEstudiante,
+    cargarEntrega
 }

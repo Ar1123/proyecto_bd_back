@@ -5,7 +5,7 @@ const database = {
     port: process.env.PORT || '3306',
     user: process.env.USER || 'root',
     password: process.env.PASSWORD || '',
-    database: process.env.DATABASE || 'bd2' //cambia por el nombre de tu bd
+    database: process.env.DATABASE || 'proyectobd' //cambia por el nombre de tu bd
 };
 
 
