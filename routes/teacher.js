@@ -15,7 +15,10 @@ const {
     getGrupo,
     editarActividad,
     getActividades,
-    getPeriodos} = require('../controllers/teacher_controller');
+    getPeriodos,
+    getActividadesPorPeriodo,
+    getActividadById,
+    editarFechaLimite} = require('../controllers/teacher_controller');
 
 
 const { validarCampos } = require('../middlewares/validate_field');
@@ -41,6 +44,8 @@ routes.get('/grupo/:id_grupo/:id_grado', getGrupo);
 routes.get('/asignatura/:id_grupo/:id_docente', getAsignatura);
 routes.get('/listActividades/:id_docente/:id_grupo',getActividades)
 routes.get('/periodos',getPeriodos)
+routes.get('/actividadesPeridos/:id_periodo/:id_grupo',getActividadesPorPeriodo)
+routes.get('/actividad/:id_actividad',getActividadById)
 
 
 /*
@@ -97,6 +102,14 @@ routes.put('/editarActividad/:id_actividad',
         validarCampos
     ],
     editarActividad
+
+);
+routes.put('/editarfechalimite/:id_actividad',
+    [
+        check('fecha_limite').not().isEmpty(),
+        validarCampos
+    ],
+    editarFechaLimite
 
 );
 

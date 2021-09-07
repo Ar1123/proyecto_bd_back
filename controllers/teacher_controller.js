@@ -98,8 +98,19 @@ getAsignatura =(req, res = response)=>{
  getPeriodos = (req, res= response)=>{
      sql ='SELECT * from periodo'
 
-querys(sql, [], res);
+        querys(sql, [], res);
     }
+
+getActividadById=(req, res = response)=>{
+        const {id_actividad} = req.params;
+
+        const sql = 'SELECT * FROM (asigna NATURAL JOIN actividad) where id_actividad =?';
+
+        querys(sql, [id_actividad], res);
+}
+
+
+
 
 /*
 .......##.......##.########...#######...######..########
@@ -181,6 +192,21 @@ editarActividad =(req, res = response)=>{
 
 }
 
+editarFechaLimite =(req, res = response) =>{
+        const {id_actividad} = req.params;
+        const{fecha_limite} = req.body;
+        sql = 'UPDATE `asigna` SET `fecha_limite` = ? WHERE id_actividad = ?';
+        querys(sql, [fecha_limite, id_actividad], res);
+}
+getActividadesPorPeriodo =(req, res = response)=>{
+
+    const {id_periodo, id_grupo} = req.params;
+    const sql = 'SELECT * FROM asigna NATURAL JOIN actividad WHERE id_periodo = ? and id_grupo = ?';
+    querys(sql, [id_periodo, id_grupo], res);
+
+
+}
+
 
 //Exports
 
@@ -196,7 +222,10 @@ module.exports = {
     getAsignatura,
     editarActividad,
     getActividades,
-    getPeriodos
+    getPeriodos,
+    getActividadesPorPeriodo,
+    getActividadById,
+    editarFechaLimite
 }
  
 
