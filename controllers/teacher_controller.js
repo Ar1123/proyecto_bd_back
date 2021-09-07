@@ -46,7 +46,8 @@ grados = (req, res = response)=>{
 asignaturas = (req, res = response)=>{
     const id =  req.params.id;
 
-    const sql =   'SELECT asignaturas.nombre FROM asignaturas NATURAL JOIN ensenia WHERE ensenia.id_docente = ? GROUP BY(asignaturas.nombre)';
+
+    const sql =   'SELECT nombre FROM ensenia NATURAL JOIN asignaturas WHERE id_docente =?  GROUP BY(id_asignaturas)';
 
     querys(sql,[id], res, true);
 }
@@ -83,6 +84,15 @@ getAsignatura =(req, res = response)=>{
  const {id_grupo, id_docente} = req.params;
  sql =  'SELECT nombre,id_asignaturas FROM ensenia NATURAL JOIN asignaturas WHERE ensenia.id_docente = ? AND ensenia.id_grupo = ?';
  querys(sql, [id_docente, id_grupo], res, true);
+ }
+
+
+ getActividades =(req, res = response)=>{
+    const {id_docente, id_grupo} = req.params;
+
+    sql = 'SELECT * FROM asigna NATURAL JOIN actividad WHERE id_docente = ?  AND id_grupo = ?';
+    querys (sql, [id_docente, id_grupo], res);
+
  }
 /*
 .......##.......##.########...#######...######..########
@@ -141,6 +151,29 @@ agregarArchivos=(req, res = response)=>{
 
 
 
+/*
+.......##.......##.########..##.....##.########
+......##.......##..##.....##.##.....##....##...
+.....##.......##...##.....##.##.....##....##...
+....##.......##....########..##.....##....##...
+...##.......##.....##........##.....##....##...
+..##.......##......##........##.....##....##...
+.##.......##.......##.........#######.....##...
+*/
+
+
+editarActividad =(req, res = response)=>{
+
+   const {id_actividad} = req.params;
+   const {descripcion}  = req.body;
+   console.log(req.body, req.params);
+
+   sql  = 'UPDATE actividad SET descripcion = ? WHERE id_actividad = ?';
+   console.log(sql);
+
+   querys(sql, [descripcion, id_actividad], res);
+
+}
 
 
 //Exports
@@ -154,8 +187,9 @@ module.exports = {
     grados,
     getGrado,
     getGrupo,
-    getAsignatura
-
+    getAsignatura,
+    editarActividad,
+    getActividades
 }
  
 

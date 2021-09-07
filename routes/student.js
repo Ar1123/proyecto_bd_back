@@ -7,7 +7,7 @@ routese.get('/estudiante/:id', datosEstudiante);
 // routese.get('/actividadesEstudiante/:id/:id_grupo', actividadesEstudiante);
 routese.get('/asignaturas1/:id_grupo', asignaturasEstudiante1);
 routese.get('/asignaturas/:id_grupo', asignaturasEstudiante);
-routese.get('/actividadEstudiante/:id_grupo', actividadesEstudiante);
+routese.get('/actividadEstudiante/:id_grupo/:id_asignaturas', actividadesEstudiante);
 routese.get('/detalleActividad/:id_actividad', actividadAsignada);
 routese.get('/gradoEstudiante/:id', gradoEstudiante);
 

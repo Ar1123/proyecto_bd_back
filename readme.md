@@ -24,7 +24,9 @@
    ```  
  - Con esta cosulta se obtiene las asignaturas asignadas por docente  
 ```sql
-     SELECT asignaturas.nombre FROM asignaturas NATURAL JOIN ensenia WHERE ensenia.id_docente = '001U' GROUP BY(asignaturas.nombre);
+     SELECT nombre FROM ensenia NATURAL JOIN asignaturas WHERE id_docente = '001U' GROUP BY(id_asignaturas);
+
+
 ```
 - Con esta consulta se obtiene la lista de los estudiantes por grado
 ```sql
@@ -60,7 +62,18 @@ SELECT grado, posicion FROM grados NATURAL JOIN grupo WHERE id_grupo=? AND id_gr
       SELECT nombre FROM ensenia NATURAL JOIN asignaturas WHERE ensenia.id_docente = ? AND ensenia.id_grupo = ?;
 
  ```
+ ```sql
+     Esta obtiene las actividades creadas por el docente de acuerdo al grado y al grupo
+      SELECT * FROM asigna NATURAL JOIN actividad WHERE id_docente = ?  AND id_grupo = ?;
 
+ ```
+# PUT
+
+   ```
+      con esta consulta se edita una actividad
+      UPDATE `actividad` SET `descripcion`='[value-3]' WHERE id_actividad=?;
+
+   ```
 
 
 
@@ -91,7 +104,7 @@ SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grup
  # Endpoints 
  # GET
 - Obtiene las asignaturas que imparte el docente
-`GET`:  localhost:3000/school/docente/id
+`GET`:  localhost:3000/school/asigDocente/id
 
  - Obtiene los grados donde el docente da clase
  localhost:3000/school/grado/001U/

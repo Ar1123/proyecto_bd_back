@@ -5,6 +5,8 @@ const connectionDb = require('../database/config');
 
 const querys = (sql, variablea, res, view = true) =>{
     try {
+        console.log(sql);
+        console.log(variablea);
         connectionDb.query(sql, variablea, (err, rows)=>{
             if(err){
                 console.log(variablea);

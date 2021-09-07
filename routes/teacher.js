@@ -12,7 +12,9 @@ const {
     agregarArchivos,
     grupos,
     grados,     
-    getGrupo} = require('../controllers/teacher_controller');
+    getGrupo,
+    editarActividad,
+    getActividades} = require('../controllers/teacher_controller');
 
 
 const { validarCampos } = require('../middlewares/validate_field');
@@ -29,21 +31,17 @@ const { validarCampos } = require('../middlewares/validate_field');
 ..##.......##......##....##..##..........##...
 .##.......##........######...########....##...
 */
-routes.get('/docente/:id', asignaturas);
+routes.get('/asigDocente/:id', asignaturas);
 routes.get('/lista/:id', listaEstudiantes);
 routes.get('/grupos/:idocente/:idGrado', grupos);
 routes.get('/grados/:id', grados);
 routes.get('/grado/:id_grado', getGrado);
 routes.get('/grupo/:id_grupo/:id_grado', getGrupo);
 routes.get('/asignatura/:id_grupo/:id_docente', getAsignatura);
+routes.get('/listActividades/:id_docente/:id_grupo',getActividades)
+
+
 /*
-
-
-
-
-
-
-
 .......##.......##.########...#######...######..########
 ......##.......##..##.....##.##.....##.##....##....##...
 .....##.......##...##.....##.##.....##.##..........##...
@@ -78,6 +76,26 @@ routes.post('/aniadirArchivo',
 ],
 //Llamado por referencia
 agregarArchivos
+);
+
+
+/*
+.......##.......##.########..##.....##.########
+......##.......##..##.....##.##.....##....##...
+.....##.......##...##.....##.##.....##....##...
+....##.......##....########..##.....##....##...
+...##.......##.....##........##.....##....##...
+..##.......##......##........##.....##....##...
+.##.......##.......##.........#######.....##...
+*/
+
+routes.put('/editarActividad/:id_actividad',
+    [
+        check('descripcion').not().isEmpty(),
+        validarCampos
+    ],
+    editarActividad
+
 );
 
 module.exports = routes;

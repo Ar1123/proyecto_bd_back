@@ -3,7 +3,9 @@ const { querys } = require("../helpers/query_helpers");
 
 datosEstudiante = (req, res = response) => {
     const id = req.params.id;
-    const sql = 'SELECT * FROM estudiante WHERE id_estudiante = ?';
+    // SELECT * FROM estudiante NATURAL JOIN usuario WHERE id_estudiante = '100U' and estudiante.id_estudiante = usuario.id_usuario;
+
+    const sql = 'SELECT * FROM estudiante NATURAL JOIN usuario WHERE id_estudiante =  ? and estudiante.id_estudiante = usuario.id_usuario';
     querys(sql, [id], res);
 
 
@@ -22,7 +24,7 @@ asignaturasEstudiante = (req, res = response) => {
     const id_grupo = req.params.id_grupo;
     // No se si vendran por parametros, ya  que al ingresar los estudiantes tambien viene el id_grupo
     // const sql = 'SELECT nombre FROM grupo NATURAL JOIN grados NATURAL JOIN asignadas NATURAL JOIN asignaturas WHERE id_grupo = ?';
-    const sql = 'SELECT nombre FROM asignadas NATURAL JOIN asignaturas WHERE asignadas.id_grado IN (SELECT id_grado FROM grupo NATURAL JOIN grados WHERE grupo.id_grupo = ? GROUP BY (id_grupo) )';
+    const sql = 'SELECT nombre,id_asignaturas FROM asignadas NATURAL JOIN asignaturas WHERE asignadas.id_grado IN (SELECT id_grado FROM grupo NATURAL JOIN grados WHERE grupo.id_grupo = ? GROUP BY (id_grupo) )';
 
     querys(sql, [id_grupo], res);
 }
@@ -40,11 +42,13 @@ asignaturasEstudiante1 = (req, res = response) => {
 
 actividadesEstudiante = (req, res = response) => {
     const id_grupo = req.params.id_grupo;
+    const id_asignaturas = req.params.id_asignaturas;
 
+    ;
 
-    const sql = 'SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grupo = ?';
+    const sql = 'SELECT * FROM asigna NATURAL JOIN ensenia NATURAL JOIN asignaturas WHERE id_grupo = ? AND id_asignaturas = ?';
 
-    querys(sql, [id_grupo], res);
+    querys(sql, [id_grupo, id_asignaturas], res);
 }
 
 actividadAsignatura = (req, res = response) => {
