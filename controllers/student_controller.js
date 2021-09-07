@@ -1,4 +1,4 @@
-const { response } = require("express");
+const { response, query } = require("express");
 const { querys } = require("../helpers/query_helpers");
 
 datosEstudiante = (req, res = response) => {
@@ -70,18 +70,43 @@ actividadAsignada = (req, res = response) => {
 
 
 
-CargarActividad =(req, res=response)=>{
+CargarActividad = (req, res = response) => {
     const { id_actividad, id_estudiante, peso, formato, nombre, ruta, fecha, tipo_archivo } = req.body;
     const sql = 'INSERT INTO archivo( id_actividad, peso,formato,nombre,ruta, tipo_archivo) VALUES  (?,?,?,?,?,?)';
     querys(sql, [id_actividad, peso, formato, nombre, ruta, tipo_archivo], res, false);
 
-    const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,?)';       
-   querys(sqls, [id_actividad, id_estudiante, fecha, 0], res);
+    const sqls = 'INSERT INTO entrega( id_actividad,id_estudiante,fecha,nota) VALUES  (?,?,?,?)';
+    querys(sqls, [id_actividad, id_estudiante, fecha, 0], res);
 
 
 
-    
 
+
+}
+
+obtenerActividad = (req, res = response) => {
+    const id = req.params.id;
+    const sql = 'SELECT * FROM `entrega` NATURAL JOIN archivo WHERE id_estudiante = ?';
+    querys(sql, [id], res);
+}
+
+eliminarArchivo = (req, res = response) => {
+    const nombre = req.params.nombre;
+    const id_actividad = req.params.id_actividad;
+    const id_estudiante = req.params.id_estudiante;
+    const sql1 = 'DELETE FROM  archivo WHERE nombre = ?'
+    querys(sql1, [nombre], res, false);
+
+    const sql2 = 'DELETE FROM `entrega` WHERE id_actividad = ? AND id_estudiante = ?'
+    querys(sql2, [id_actividad, id_estudiante], res);
+}
+
+obtenerArchivoDoc = (req, res = response) => {
+    const ida = req.params.ida;
+    const idg = req.params.idg;
+    const tipo = req.params.tipo
+    const sql = 'SELECT * FROM `asigna` NATURAL JOIN archivo WHERE id_grupo = ?';
+    querys(sql, [id], res);
 }
 
 // CargarActividad = (req, res = response) => {
@@ -110,5 +135,7 @@ module.exports = {
     CargarActividad,
     actividadAsignada,
     gradoEstudiante,
+    obtenerActividad,
+    eliminarArchivo
     // cargarEntrega
 }
