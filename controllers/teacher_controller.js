@@ -94,6 +94,13 @@ getAsignatura =(req, res = response)=>{
     querys (sql, [id_docente, id_grupo], res);
 
  }
+
+ getPeriodos = (req, res= response)=>{
+     sql ='SELECT * from periodo'
+
+querys(sql, [], res);
+    }
+
 /*
 .......##.......##.########...#######...######..########
 ......##.......##..##.....##.##.....##.##....##....##...
@@ -169,7 +176,6 @@ editarActividad =(req, res = response)=>{
    console.log(req.body, req.params);
 
    sql  = 'UPDATE actividad SET descripcion = ? WHERE id_actividad = ?';
-   console.log(sql);
 
    querys(sql, [descripcion, id_actividad], res);
 
@@ -189,7 +195,8 @@ module.exports = {
     getGrupo,
     getAsignatura,
     editarActividad,
-    getActividades
+    getActividades,
+    getPeriodos
 }
  
 

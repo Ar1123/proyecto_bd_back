@@ -14,7 +14,8 @@ const {
     grados,     
     getGrupo,
     editarActividad,
-    getActividades} = require('../controllers/teacher_controller');
+    getActividades,
+    getPeriodos} = require('../controllers/teacher_controller');
 
 
 const { validarCampos } = require('../middlewares/validate_field');
@@ -39,6 +40,7 @@ routes.get('/grado/:id_grado', getGrado);
 routes.get('/grupo/:id_grupo/:id_grado', getGrupo);
 routes.get('/asignatura/:id_grupo/:id_docente', getAsignatura);
 routes.get('/listActividades/:id_docente/:id_grupo',getActividades)
+routes.get('/periodos',getPeriodos)
 
 
 /*
